@@ -2,10 +2,6 @@
     <string name="app_name">World Wonders</string>
     <string name="signup">SIGNUP</string>
     <string name="login">LOGIN</string>
-    <string name="title_activity_signup">World Wonders</string>
-
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="name">Name</string>
