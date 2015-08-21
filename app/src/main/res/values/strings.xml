@@ -8,4 +8,7 @@
     <string name="username">Usuário</string>
     <string name="password">Senha</string>
     <string name="name">Nome</string>
+    <string name="title_activity_world_wonder">World Wonders</string>
+
+    <string name="hello_world">Hello world!</string>
 </resources>

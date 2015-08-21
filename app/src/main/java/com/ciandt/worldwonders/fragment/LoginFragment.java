@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.ciandt.worldwonders.R;
 import com.ciandt.worldwonders.activity.SignupActivity;
+import com.ciandt.worldwonders.activity.WorldWonderActivity;
 import com.ciandt.worldwonders.model.User;
 
 /**
@@ -24,6 +25,7 @@ public class LoginFragment extends Fragment {
     private User user;
 
     Button buttonSignup;
+    Button buttonLogin;
     TextView textUsername;
     TextView textPassword;
 
@@ -44,6 +46,7 @@ public class LoginFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         buttonSignup = (Button) view.findViewById(R.id.btn_signup);
+        buttonLogin = (Button) view.findViewById(R.id.btn_login);
         textUsername = (TextView) view.findViewById(R.id.edit_username);
         textPassword = (TextView) view.findViewById(R.id.edit_password);
 
@@ -52,6 +55,14 @@ public class LoginFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), SignupActivity.class);
                 startActivityForResult(intent, REQUEST_SIGNUP);
+            }
+        });
+
+        buttonLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), WorldWonderActivity.class);
+                startActivity(intent);
             }
         });
     }
