@@ -29,4 +29,5 @@
         android:id="@+id/btn_signup"
         android:layout_below="@+id/btn_login"
         android:text="@string/signup"/>
+
 </RelativeLayout>
