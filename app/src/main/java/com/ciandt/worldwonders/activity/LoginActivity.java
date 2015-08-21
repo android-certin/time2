@@ -15,6 +15,8 @@ import com.ciandt.worldwonders.model.User;
  * Created by andersonr on 20/08/15.
  */
 public class LoginActivity extends AppCompatActivity {
+    private final int REQUEST_SIGNUP = 1;
+
     private User user;
 
     @Override
@@ -29,7 +31,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
-                startActivityForResult(intent, 1);
+                startActivityForResult(intent, REQUEST_SIGNUP);
             }
         });
     }
@@ -39,10 +41,14 @@ public class LoginActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         Log.i("LoginActivity", "onActivityResult");
 
-        user = (User) data.getParcelableExtra("user");
-        if(user != null) {
-            TextView textUsername = (TextView) findViewById(R.id.edit_username);
-            textUsername.setText(user.getUsername());
+        switch (requestCode) {
+            case REQUEST_SIGNUP:
+                user = (User) data.getParcelableExtra("user");
+                if(user != null) {
+                    TextView textUsername = (TextView) findViewById(R.id.edit_username);
+                    textUsername.setText(user.getUsername());
+                }
+               break;
         }
     }
 
