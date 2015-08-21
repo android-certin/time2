@@ -2,6 +2,7 @@ package com.ciandt.worldwonders.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -41,14 +42,16 @@ public class LoginActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         Log.i("LoginActivity", "onActivityResult");
 
-        switch (requestCode) {
-            case REQUEST_SIGNUP:
-                user = (User) data.getParcelableExtra("user");
-                if(user != null) {
-                    TextView textUsername = (TextView) findViewById(R.id.edit_username);
-                    textUsername.setText(user.getUsername());
-                }
-               break;
+        if (data != null) {
+            switch (requestCode) {
+                case REQUEST_SIGNUP:
+                    user = (User) data.getParcelableExtra("user");
+                    if(user != null) {
+                        TextView textUsername = (TextView) findViewById(R.id.edit_username);
+                        textUsername.setText(user.getUsername());
+                    }
+                break;
+            }
         }
     }
 
