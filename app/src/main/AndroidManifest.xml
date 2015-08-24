@@ -23,7 +23,7 @@
             android:label="@string/title_activity_signup" >
         </activity>
         <activity
-            android:name=".activity.WorldWonderActivity"
+            android:name=".fragment.WondersFragment"
             android:label="@string/title_activity_world_wonder" >
         </activity>
     </application>

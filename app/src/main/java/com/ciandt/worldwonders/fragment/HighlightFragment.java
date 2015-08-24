@@ -8,11 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ciandt.worldwonders.R;
+import com.ciandt.worldwonders.model.Wonder;
 
 /**
  * Created by andersonr on 21/08/15.
  */
-public class FavoriteFragment extends Fragment {
+public class HighlightFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,5 +29,14 @@ public class FavoriteFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+    }
+    
+   public static HighlightFragment newInstance(Wonder wonder) {
+        
+        Bundle args = new Bundle();
+        args.putSerializable("wonder",wonder);
+        HighlightFragment fragment = new HighlightFragment();
+        fragment.setArguments(args);
+        return fragment;
     }
 }

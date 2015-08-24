@@ -1,40 +1,49 @@
-package com.ciandt.worldwonders.activity;
+package com.ciandt.worldwonders.fragment;
 
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.ciandt.worldwonders.R;
-import com.ciandt.worldwonders.fragment.FavoriteFragment;
 
-public class WorldWonderActivity extends AppCompatActivity {
+public class WondersFragment extends Fragment {
     private final int NUM_PAGES = 3;
 
     private ViewPager viewPager;
 
     private PagerAdapter pagerAdapter;
 
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_world_wonder);
-        viewPager = (ViewPager) findViewById(R.id.pager);
-        pagerAdapter = new WorldWonderPageAdapter(getSupportFragmentManager());
-        viewPager.setAdapter(pagerAdapter);
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_world_wonder, container, false);
+        return view;
+
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_world_wonder, menu);
-        return true;
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        viewPager = (ViewPager) view.findViewById(R.id.pager);
+        pagerAdapter = new WorldWonderPageAdapter(getFragmentManager());
+        viewPager.setAdapter(pagerAdapter);
+
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -59,7 +68,7 @@ public class WorldWonderActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-            return new FavoriteFragment();
+            return new HighlightFragment();
         }
 
         @Override

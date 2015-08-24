@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +14,6 @@ import android.widget.TextView;
 
 import com.ciandt.worldwonders.R;
 import com.ciandt.worldwonders.activity.SignupActivity;
-import com.ciandt.worldwonders.activity.WorldWonderActivity;
 import com.ciandt.worldwonders.model.User;
 
 /**
@@ -61,11 +61,18 @@ public class LoginFragment extends Fragment {
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), WorldWonderActivity.class);
-                startActivity(intent);
+                Fragment newFragment = new WondersFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+
+
+                transaction.replace(R.id.fragment_container, newFragment);
+                transaction.addToBackStack("Wonders");
+                transaction.commit();
             }
         });
     }
+
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -81,5 +88,9 @@ public class LoginFragment extends Fragment {
                 }
                 break;
         }
+    }
+
+    public interface OnLoginListener {
+
     }
 }
