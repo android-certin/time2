@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.annotation.NonNull;
 
 import com.ciandt.worldwonders.model.Wonder;
 
@@ -38,14 +39,7 @@ public class WonderDAO implements DAO<Wonder> {
 
             do {
 
-                Wonder wonder = new Wonder();
-                wonder.setDescription(cursor.getString(cursor.getColumnIndex("description")));
-                wonder.setId(cursor.getLong(cursor.getColumnIndex("id")));
-                wonder.setLatitude(cursor.getDouble(cursor.getColumnIndex("latitude")));
-                wonder.setLongitude(cursor.getDouble(cursor.getColumnIndex("longitude")));
-                wonder.setName(cursor.getString(cursor.getColumnIndex("name")));
-                wonder.setPhoto(cursor.getString(cursor.getColumnIndex("photo")));
-                wonder.setUrl(cursor.getString(cursor.getColumnIndex("url")));
+                Wonder wonder = getWonder(cursor);
 
                 lista.add(wonder);
 
@@ -57,6 +51,19 @@ public class WonderDAO implements DAO<Wonder> {
         return lista;
     }
 
+    @NonNull
+    private Wonder getWonder(Cursor cursor) {
+        Wonder wonder = new Wonder();
+        wonder.setDescription(cursor.getString(cursor.getColumnIndex("description")));
+        wonder.setId(cursor.getLong(cursor.getColumnIndex("id")));
+        wonder.setLatitude(cursor.getDouble(cursor.getColumnIndex("latitude")));
+        wonder.setLongitude(cursor.getDouble(cursor.getColumnIndex("longitude")));
+        wonder.setName(cursor.getString(cursor.getColumnIndex("name")));
+        wonder.setPhoto(cursor.getString(cursor.getColumnIndex("photo")));
+        wonder.setUrl(cursor.getString(cursor.getColumnIndex("url")));
+        return wonder;
+    }
+
     @Override
     public Wonder getById(Long id) {
 
@@ -65,14 +72,7 @@ public class WonderDAO implements DAO<Wonder> {
         Wonder wonder = new Wonder();
 
         if (cursor.moveToFirst()) {
-
-            wonder.setDescription(cursor.getString(cursor.getColumnIndex("description")));
-            wonder.setId(cursor.getLong(cursor.getColumnIndex("id")));
-            wonder.setLatitude(cursor.getDouble(cursor.getColumnIndex("latitude")));
-            wonder.setLongitude(cursor.getDouble(cursor.getColumnIndex("longitude")));
-            wonder.setName(cursor.getString(cursor.getColumnIndex("name")));
-            wonder.setPhoto(cursor.getString(cursor.getColumnIndex("photo")));
-            wonder.setUrl(cursor.getString(cursor.getColumnIndex("url")));
+            wonder = getWonder(cursor);
         }
 
         close();
@@ -90,14 +90,7 @@ public class WonderDAO implements DAO<Wonder> {
 
             do {
 
-                Wonder wonder = new Wonder();
-                wonder.setDescription(cursor.getString(cursor.getColumnIndex("description")));
-                wonder.setId(cursor.getLong(cursor.getColumnIndex("id")));
-                wonder.setLatitude(cursor.getDouble(cursor.getColumnIndex("latitude")));
-                wonder.setLongitude(cursor.getDouble(cursor.getColumnIndex("longitude")));
-                wonder.setName(cursor.getString(cursor.getColumnIndex("name")));
-                wonder.setPhoto(cursor.getString(cursor.getColumnIndex("photo")));
-                wonder.setUrl(cursor.getString(cursor.getColumnIndex("url")));
+                Wonder wonder = getWonder(cursor);
 
                 lista.add(wonder);
 
@@ -117,6 +110,17 @@ public class WonderDAO implements DAO<Wonder> {
     @Override
     public boolean update(Wonder wonder) {
 
+        ContentValues values = getContentValues(wonder);
+
+        int retorno = sqLiteDatabase.update(NOME_TABELA, values, "id", new String[]{wonder.getId().toString()});
+
+        close();
+
+        return retorno > 0;
+    }
+
+    @NonNull
+    private ContentValues getContentValues(Wonder wonder) {
         ContentValues values = new ContentValues();
         values.put("name", wonder.getName());
         values.put("description", wonder.getDescription());
@@ -124,12 +128,7 @@ public class WonderDAO implements DAO<Wonder> {
         values.put("url", wonder.getUrl());
         values.put("latitude", wonder.getLatitude());
         values.put("longitude", wonder.getLongitude());
-
-        int retorno = sqLiteDatabase.update(NOME_TABELA, values, "id", new String[]{wonder.getId().toString()});
-
-        close();
-
-        return retorno > 0;
+        return values;
     }
 
     @Override
@@ -143,13 +142,7 @@ public class WonderDAO implements DAO<Wonder> {
     @Override
     public boolean insert(Wonder wonder) {
 
-        ContentValues values = new ContentValues();
-        values.put("name", wonder.getName());
-        values.put("description", wonder.getDescription());
-        values.put("photo", wonder.getPhoto());
-        values.put("url", wonder.getUrl());
-        values.put("latitude", wonder.getLatitude());
-        values.put("longitude", wonder.getLongitude());
+        ContentValues values = getContentValues(wonder);
 
         long retorno = sqLiteDatabase.insert(NOME_TABELA,null,values);
 
