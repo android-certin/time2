@@ -1,5 +1,8 @@
 package com.ciandt.worldwonders.database;
 
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+
 import com.ciandt.worldwonders.model.Wonder;
 
 import java.util.List;
@@ -11,9 +14,23 @@ public class WonderDAO implements DAO<Wonder> {
 
     private final String NOME_TABELA = "wonders";
 
+    private Context context;
+    private WondersSQLiteHelper wondersSQLiteHelper;
+    private SQLiteDatabase sqLiteDatabase;
+
+    public WonderDAO(Context context) {
+        this.context = context;
+
+        wondersSQLiteHelper = new WondersSQLiteHelper(context);
+        sqLiteDatabase = wondersSQLiteHelper.getWritableDatabase();
+    }
+
     @Override
     public List<Wonder> getAll() {
         String SQL = "select * from " + NOME_TABELA;
+
+        sqLiteDatabase.query(NOME_TABELA,null,null,null,null,null,null);
+
         return null;
     }
 
