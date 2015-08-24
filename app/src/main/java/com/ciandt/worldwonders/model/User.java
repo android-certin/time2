@@ -20,6 +20,9 @@ public class User implements Parcelable {
         this.password = password;
     }
 
+    public User() {
+    }
+
     public User(Parcel in) {
         String[] data = new String[3];
 

@@ -59,15 +59,10 @@ public class LoginFragment extends Fragment {
         });
 
         buttonLogin.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
-                Fragment newFragment = new WondersFragment();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-
-
-                transaction.replace(R.id.fragment_container, newFragment);
-                transaction.addToBackStack("Wonders");
-                transaction.commit();
+                onLoginListener.onLogin(new User());
             }
         });
     }
@@ -90,7 +85,13 @@ public class LoginFragment extends Fragment {
         }
     }
 
-    public interface OnLoginListener {
+    OnLoginListener onLoginListener;
 
+    public void setOnLoginListener(OnLoginListener onLoginListener) {
+        this.onLoginListener = onLoginListener;
+    }
+
+    public interface OnLoginListener {
+        public void onLogin(User user);
     }
 }
