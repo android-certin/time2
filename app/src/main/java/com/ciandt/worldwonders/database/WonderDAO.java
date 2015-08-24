@@ -1,10 +1,13 @@
 package com.ciandt.worldwonders.database;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.ciandt.worldwonders.model.Wonder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,51 +30,131 @@ public class WonderDAO implements DAO<Wonder> {
 
     @Override
     public List<Wonder> getAll() {
-        String SQL = "select * from " + NOME_TABELA;
 
-        sqLiteDatabase.query(NOME_TABELA,null,null,null,null,null,null);
+        List<Wonder> lista = new ArrayList<>();
+        Cursor cursor = sqLiteDatabase.query(NOME_TABELA, null, null, null, null, null, null);
 
-        return null;
+        if (cursor.moveToFirst()) {
+
+            do {
+
+                Wonder wonder = new Wonder();
+                wonder.setDescription(cursor.getString(cursor.getColumnIndex("description")));
+                wonder.setId(cursor.getLong(cursor.getColumnIndex("id")));
+                wonder.setLatitude(cursor.getDouble(cursor.getColumnIndex("latitude")));
+                wonder.setLongitude(cursor.getDouble(cursor.getColumnIndex("longitude")));
+                wonder.setName(cursor.getString(cursor.getColumnIndex("name")));
+                wonder.setPhoto(cursor.getString(cursor.getColumnIndex("photo")));
+                wonder.setUrl(cursor.getString(cursor.getColumnIndex("url")));
+
+                lista.add(wonder);
+
+            } while (cursor.moveToNext());
+        }
+
+        close();
+
+        return lista;
     }
 
     @Override
     public Wonder getById(Long id) {
-        String SQL = "select * from " + NOME_TABELA + " where id = "+id;
-        return null;
+
+        Cursor cursor = sqLiteDatabase.query(NOME_TABELA, null, "id", new String[]{id.toString()}, null, null, null);
+
+        Wonder wonder = new Wonder();
+
+        if (cursor.moveToFirst()) {
+
+            wonder.setDescription(cursor.getString(cursor.getColumnIndex("description")));
+            wonder.setId(cursor.getLong(cursor.getColumnIndex("id")));
+            wonder.setLatitude(cursor.getDouble(cursor.getColumnIndex("latitude")));
+            wonder.setLongitude(cursor.getDouble(cursor.getColumnIndex("longitude")));
+            wonder.setName(cursor.getString(cursor.getColumnIndex("name")));
+            wonder.setPhoto(cursor.getString(cursor.getColumnIndex("photo")));
+            wonder.setUrl(cursor.getString(cursor.getColumnIndex("url")));
+        }
+
+        close();
+
+        return wonder;
     }
 
     @Override
     public List<Wonder> search(String word) {
-        String SQL = "select * from " + NOME_TABELA + " where name like '%" + word + "'%";
-        return null;
+
+        List<Wonder> lista = new ArrayList<>();
+        Cursor cursor = sqLiteDatabase.query(NOME_TABELA, null, "name", new String[]{"%"+word+"%"}, null, null, null);
+
+        if (cursor.moveToFirst()) {
+
+            do {
+
+                Wonder wonder = new Wonder();
+                wonder.setDescription(cursor.getString(cursor.getColumnIndex("description")));
+                wonder.setId(cursor.getLong(cursor.getColumnIndex("id")));
+                wonder.setLatitude(cursor.getDouble(cursor.getColumnIndex("latitude")));
+                wonder.setLongitude(cursor.getDouble(cursor.getColumnIndex("longitude")));
+                wonder.setName(cursor.getString(cursor.getColumnIndex("name")));
+                wonder.setPhoto(cursor.getString(cursor.getColumnIndex("photo")));
+                wonder.setUrl(cursor.getString(cursor.getColumnIndex("url")));
+
+                lista.add(wonder);
+
+            } while (cursor.moveToNext());
+        }
+
+        close();
+
+        return lista;
     }
 
     @Override
     public void close() {
-
+        sqLiteDatabase.close();
     }
 
     @Override
     public boolean update(Wonder wonder) {
-        String SQL = "update " + NOME_TABELA +" set id = " +wonder.getId() + ", name =  "
-                +wonder.getName()+ ", description = " +wonder.getDescription() + ", photo = "
-                +wonder.getPhoto() + ", url = "+wonder.getUrl() + ", latitude = "+wonder.getLatitude()
-                + ", longitude = "+wonder.getLongitude() + " where id = "+ wonder.getId();
-        return false;
+
+        ContentValues values = new ContentValues();
+        values.put("name", wonder.getName());
+        values.put("description", wonder.getDescription());
+        values.put("photo", wonder.getPhoto());
+        values.put("url", wonder.getUrl());
+        values.put("latitude", wonder.getLatitude());
+        values.put("longitude", wonder.getLongitude());
+
+        int retorno = sqLiteDatabase.update(NOME_TABELA, values, "id", new String[]{wonder.getId().toString()});
+
+        close();
+
+        return retorno > 0;
     }
 
     @Override
     public boolean delete(Wonder wonder) {
-        String SQL = "delete " + NOME_TABELA + " where id = "+ wonder.getId();
 
-        return false;
+        int retorno = sqLiteDatabase.delete(NOME_TABELA, "id", new String[]{wonder.getId().toString()});
+        close();
+        return retorno > 0;
     }
 
     @Override
     public boolean insert(Wonder wonder) {
-        String SQL = "insert into " + NOME_TABELA +" values ('"+wonder.getName() +"','"+
-                wonder.getDescription()+"','"+wonder.getPhoto()+"','"+wonder.getUrl()+"','"+
-                wonder.getLatitude()+","+wonder.getLongitude()+")";
-        return false;
+
+        ContentValues values = new ContentValues();
+        values.put("name", wonder.getName());
+        values.put("description", wonder.getDescription());
+        values.put("photo", wonder.getPhoto());
+        values.put("url", wonder.getUrl());
+        values.put("latitude", wonder.getLatitude());
+        values.put("longitude", wonder.getLongitude());
+
+        long retorno = sqLiteDatabase.insert(NOME_TABELA,null,values);
+
+        close();
+
+        return retorno > 0;
     }
 }
