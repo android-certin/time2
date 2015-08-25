@@ -28,7 +28,6 @@ import java.util.Collections;
 import java.util.List;
 
 public class WondersFragment extends Fragment {
-    private final int NUM_PAGES = 3;
 
     private ViewPager viewPager;
     private PagerAdapter pagerAdapter;
