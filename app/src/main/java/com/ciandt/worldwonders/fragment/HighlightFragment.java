@@ -1,6 +1,8 @@
 package com.ciandt.worldwonders.fragment;
 
+import android.app.ProgressDialog;
 import android.graphics.Bitmap;
+import android.media.MediaSync;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,22 +12,28 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.ciandt.worldwonders.R;
 import com.ciandt.worldwonders.database.WonderDAO;
 import com.ciandt.worldwonders.helpers.Helpers;
 import com.ciandt.worldwonders.model.Wonder;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
 
 import java.util.List;
 
+
 /**
  * Created by andersonr on 21/08/15.
  */
 public class HighlightFragment extends Fragment {
+
+    ProgressDialog progressDialog;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +50,8 @@ public class HighlightFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        
+        progressDialog = new ProgressDialog(getActivity()).show(getActivity(), getString(R.string.title_progress_dialog_wait_image), getString(R.string.msg_progress_dialog_wait_image), false, true);
+
         ImageView imageView = (ImageView)view.findViewById(R.id.img_wonders);
         TextView textImg = (TextView) view.findViewById(R.id.nameImg);
         Wonder wonder = (Wonder) getArguments().getSerializable("wonder");
@@ -51,7 +60,18 @@ public class HighlightFragment extends Fragment {
 
 
         Picasso.with(getContext()).load(Helpers.getRawResourceID(getContext(),img)).config(Bitmap.Config.RGB_565)
-                .into(imageView);
+                .into(imageView, new Callback() {
+                    @Override
+                    public void onSuccess() {
+                        progressDialog.dismiss();
+                    }
+
+                    @Override
+                    public void onError() {
+                        // TODO Auto-generated method stub
+
+                    }
+                });
 
         textImg.setText(wonder.getName());
 

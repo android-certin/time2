@@ -11,4 +11,6 @@
     <string name="title_activity_world_wonder">World Wonders</string>
 
     <string name="hello_world">Hello world!</string>
+    <string name="msg_progress_dialog_wait_image">Carregando imagem...</string>
+    <string name="title_progress_dialog_wait_image">Aguarde</string>
 </resources>
