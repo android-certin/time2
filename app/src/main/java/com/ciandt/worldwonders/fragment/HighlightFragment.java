@@ -54,6 +54,7 @@ public class HighlightFragment extends Fragment {
 
         ImageView imageView = (ImageView)view.findViewById(R.id.img_wonders);
         TextView textImg = (TextView) view.findViewById(R.id.nameImg);
+
         Wonder wonder = (Wonder) getArguments().getSerializable("wonder");
 
         String img = wonder.getPhoto().split("\\.")[0];

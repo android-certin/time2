@@ -7,13 +7,19 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.ciandt.worldwonders.R;
 
+import com.ciandt.worldwonders.adapter.WonderRecyclerAdapter;
+import com.ciandt.worldwonders.adapter.WorldWonderPageAdapter;
 import com.ciandt.worldwonders.database.WonderDAO;
 import com.ciandt.worldwonders.model.Wonder;
 
@@ -25,8 +31,8 @@ public class WondersFragment extends Fragment {
     private final int NUM_PAGES = 3;
 
     private ViewPager viewPager;
-
     private PagerAdapter pagerAdapter;
+    private RecyclerView recyclerView;
 
 
     @Override
@@ -50,14 +56,14 @@ public class WondersFragment extends Fragment {
         List<Wonder> wonderList = wonderDAO.getAll();
         Collections.shuffle(wonderList);
 
-
-
         viewPager = (ViewPager) view.findViewById(R.id.pager);
         pagerAdapter = new WorldWonderPageAdapter(getFragmentManager(),wonderList);
         viewPager.setAdapter(pagerAdapter);
-        
 
+        recyclerView = (RecyclerView) view.findViewById(R.id.wonder_recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        recyclerView.setAdapter(new WonderRecyclerAdapter(wonderList,getContext()));
     }
 
 
@@ -76,24 +82,10 @@ public class WondersFragment extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
-    private class WorldWonderPageAdapter extends FragmentStatePagerAdapter {
-
-        List<Wonder> wonderList;
-        public WorldWonderPageAdapter(FragmentManager fm, List<Wonder> wonders) {
-            super(fm);
-            wonderList = wonders;
-        }
 
 
 
-        @Override
-        public Fragment getItem(int position) {
-            return HighlightFragment.newInstance(wonderList.get(position));
-        }
-
-        @Override
-        public int getCount() {
-            return NUM_PAGES;
-        }
-    }
 }
+
+
+
