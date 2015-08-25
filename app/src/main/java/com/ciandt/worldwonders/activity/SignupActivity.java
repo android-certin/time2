@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.ciandt.worldwonders.R;
 import com.ciandt.worldwonders.model.User;
 
-public class SignupActivity extends AppCompatActivity {
+public class SignupActivity extends BaseActivity {
 
     private User user;
 
