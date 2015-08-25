@@ -14,11 +14,10 @@ public class WorldWondersApp  extends Application{
     public void onCreate() {
         super.onCreate();
 
-        if (!WondersSQLiteHelper.verificaBancoCriado()){
+        if (!WondersSQLiteHelper.verificaBancoCriado()) {
             WondersSQLiteHelper.copiaBanco(getApplicationContext());
         }
 
 
-        new WonderDAO(getApplicationContext()).getAll();
     }
 }

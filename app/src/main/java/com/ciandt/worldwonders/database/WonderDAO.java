@@ -84,7 +84,7 @@ public class WonderDAO implements DAO<Wonder> {
     public List<Wonder> search(String word) {
 
         List<Wonder> lista = new ArrayList<>();
-        Cursor cursor = sqLiteDatabase.query(NOME_TABELA, null, "name like ?", new String[]{"%"+word+"%"}, null, null, null);
+        Cursor cursor = sqLiteDatabase.query(NOME_TABELA, null, "name", new String[]{"%"+word+"%"}, null, null, null);
 
         if (cursor.moveToFirst()) {
 
