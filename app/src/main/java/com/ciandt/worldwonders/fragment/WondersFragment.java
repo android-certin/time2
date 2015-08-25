@@ -13,10 +13,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ciandt.worldwonders.R;
+
 import com.ciandt.worldwonders.database.WonderDAO;
 import com.ciandt.worldwonders.model.Wonder;
 
 import java.util.Collections;
+
 import java.util.List;
 
 public class WondersFragment extends Fragment {
@@ -43,13 +45,17 @@ public class WondersFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        viewPager = (ViewPager) view.findViewById(R.id.pager);
-        pagerAdapter = new WorldWonderPageAdapter(getFragmentManager());
-        viewPager.setAdapter(pagerAdapter);
 
         WonderDAO wonderDAO = new WonderDAO(getActivity());
         List<Wonder> wonderList = wonderDAO.getAll();
         Collections.shuffle(wonderList);
+
+
+
+        viewPager = (ViewPager) view.findViewById(R.id.pager);
+        pagerAdapter = new WorldWonderPageAdapter(getFragmentManager(),wonderList);
+        viewPager.setAdapter(pagerAdapter);
+        
 
 
     }
@@ -72,13 +78,17 @@ public class WondersFragment extends Fragment {
 
     private class WorldWonderPageAdapter extends FragmentStatePagerAdapter {
 
-        public WorldWonderPageAdapter(FragmentManager fm) {
+        List<Wonder> wonderList;
+        public WorldWonderPageAdapter(FragmentManager fm, List<Wonder> wonders) {
             super(fm);
+            wonderList = wonders;
         }
+
+
 
         @Override
         public Fragment getItem(int position) {
-            return new HighlightFragment();
+            return HighlightFragment.newInstance(wonderList.get(position));
         }
 
         @Override
