@@ -13,6 +13,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ciandt.worldwonders.R;
+import com.ciandt.worldwonders.database.WonderDAO;
+import com.ciandt.worldwonders.model.Wonder;
+
+import java.util.Collections;
+import java.util.List;
 
 public class WondersFragment extends Fragment {
     private final int NUM_PAGES = 3;
@@ -41,6 +46,11 @@ public class WondersFragment extends Fragment {
         viewPager = (ViewPager) view.findViewById(R.id.pager);
         pagerAdapter = new WorldWonderPageAdapter(getFragmentManager());
         viewPager.setAdapter(pagerAdapter);
+
+        WonderDAO wonderDAO = new WonderDAO(getActivity());
+        List<Wonder> wonderList = wonderDAO.getAll();
+        Collections.shuffle(wonderList);
+
 
     }
 

@@ -6,9 +6,13 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.ciandt.worldwonders.R;
+import com.ciandt.worldwonders.database.WonderDAO;
 import com.ciandt.worldwonders.model.Wonder;
+
+import java.util.List;
 
 /**
  * Created by andersonr on 21/08/15.
@@ -29,6 +33,9 @@ public class HighlightFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        
+        ImageView imageView = (ImageView)view.findViewById(R.id.img_wonders);
+
     }
     
    public static HighlightFragment newInstance(Wonder wonder) {
