@@ -2,6 +2,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.ciandt.worldwonders.fragment.WondersFragment">
-    <item android:id="@+id/action_settings" android:title="@string/action_settings"
-        android:orderInCategory="100" app:showAsAction="never" />
+
+    <item android:id="@+id/action_bookmark" android:title="@string/action_bookmark"
+        android:orderInCategory="100" app:showAsAction="always" android:icon="@drawable/ic_bookmark_white_24dp" />
+
+    <item android:id="@+id/action_share" android:title="@string/action_share"
+        android:orderInCategory="100" app:showAsAction="always" android:icon="@drawable/ic_share_white_24dp"/>
+
+    <item android:id="@+id/action_directions" android:title="@string/action_directions"
+        android:orderInCategory="100" app:showAsAction="always" android:icon="@drawable/ic_directions_white_24dp"/>
+
 </menu>
