@@ -53,7 +53,6 @@ public class WonderDetailActivity extends AppCompatActivity {
                 .config(Bitmap.Config.RGB_565).resize(300,300).centerCrop()
                 .into(imgDetail);
 
-
     }
 
     @Override
@@ -65,8 +64,7 @@ public class WonderDetailActivity extends AppCompatActivity {
                 WonderDAO wonderDAO = new WonderDAO(this);
                 if (wonder.isBookMark()){
                     wonderDAO.deleteBookMark(wonder);
-                }else
-                {
+                }else {
                     wonderDAO.insertBookMark(wonder);
                 }
 
@@ -106,6 +104,10 @@ public class WonderDetailActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_world_wonder, menu);
+
+        if (wonder.isBookMark()) {
+            menu.findItem(R.id.action_bookmark).setIcon(R.drawable.ic_bookmark_white_24dp);
+        }
         return true;
     }
 }
