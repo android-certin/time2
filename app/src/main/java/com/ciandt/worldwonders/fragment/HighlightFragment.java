@@ -76,6 +76,8 @@ public class HighlightFragment extends Fragment {
 
         textImg.setText(wonder.getName());
 
+
+
     }
     
    public static HighlightFragment newInstance(Wonder wonder) {

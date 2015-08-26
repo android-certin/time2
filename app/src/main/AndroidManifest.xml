@@ -27,6 +27,11 @@
             android:name=".fragment.WondersFragment"
             android:label="@string/title_activity_world_wonder" >
         </activity>
+
+        <activity
+            android:name=".activity.WonderDetailActivity"
+            >
+        </activity>
     </application>
 
 </manifest>

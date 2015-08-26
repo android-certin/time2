@@ -1,6 +1,7 @@
 package com.ciandt.worldwonders.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ciandt.worldwonders.R;
+import com.ciandt.worldwonders.activity.WonderDetailActivity;
 import com.ciandt.worldwonders.helpers.Helpers;
 import com.ciandt.worldwonders.model.Wonder;
 import com.squareup.picasso.Picasso;
@@ -24,6 +26,7 @@ public class WonderRecyclerAdapter extends RecyclerView.Adapter<WonderRecyclerAd
 
     private List<Wonder> wonderLista;
     private Context context;
+    private Wonder wonder;
 
     public WonderRecyclerAdapter(List<Wonder> wonderList, Context context) {
         this.wonderLista = wonderList;
@@ -41,13 +44,24 @@ public class WonderRecyclerAdapter extends RecyclerView.Adapter<WonderRecyclerAd
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
 
         holder.txtViewTitle.setText(wonderLista.get(position).getName());
         String imgStr = wonderLista.get(position).getPhoto().split("\\.")[0];
         Picasso.with(context).load(Helpers.getRawResourceID(context, imgStr))
                 .config(Bitmap.Config.RGB_565).resize(250,250).centerCrop()
                 .into(holder.imgViewIcon);
+        wonder = wonderLista.get(position);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, WonderDetailActivity.class);
+                intent.putExtra("wonder",wonder);
+                context.startActivity(intent);
+
+            }
+        });
 
     }
 
@@ -62,10 +76,11 @@ public class WonderRecyclerAdapter extends RecyclerView.Adapter<WonderRecyclerAd
         public TextView txtViewTitle;
         public ImageView imgViewIcon;
 
-        public ViewHolder(View itemLayoutView) {
+        public ViewHolder(final View itemLayoutView) {
             super(itemLayoutView);
             txtViewTitle = (TextView) itemLayoutView.findViewById(R.id.text_list);
             imgViewIcon = (ImageView) itemLayoutView.findViewById(R.id.img_list);
+
         }
 
     }
