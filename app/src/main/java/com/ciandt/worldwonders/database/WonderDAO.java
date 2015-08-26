@@ -168,7 +168,7 @@ public class WonderDAO implements DAO<Wonder> {
 
     public boolean deleteBookMark(Wonder wonder){
 
-        int retorno = sqLiteDatabase.delete(NOME_TABELA_BOOKMARKS, "idWonders", new String[]{wonder.getId().toString()});
+        int retorno = sqLiteDatabase.delete(NOME_TABELA_BOOKMARKS, "idWonders=?", new String[]{wonder.getId().toString()});
         close();
         return retorno > 0;
 
