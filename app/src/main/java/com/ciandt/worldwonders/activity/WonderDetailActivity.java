@@ -42,7 +42,7 @@ public class WonderDetailActivity extends AppCompatActivity {
         TextView txDetailDescription = (TextView) findViewById(R.id.detail_description);
         ImageView imgDetail = (ImageView) findViewById(R.id.detail_image);
 
-        
+
         txDetailDescription.setText(wonder.getDescription().toString());
 
         String img = wonder.getPhoto().split("\\.")[0];
