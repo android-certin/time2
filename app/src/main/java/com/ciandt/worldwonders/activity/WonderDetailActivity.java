@@ -3,6 +3,7 @@ package com.ciandt.worldwonders.activity;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
@@ -27,14 +28,21 @@ public class WonderDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_wonder_detail);
 
         final Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        toolbar.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+        CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+        collapsingToolbarLayout.setTitle(wonder.getName());
         setSupportActionBar(toolbar);
+
+
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        TextView txDetailName = (TextView) findViewById(R.id.detail_name);
+
+
         TextView txDetailDescription = (TextView) findViewById(R.id.detail_description);
         ImageView imgDetail = (ImageView) findViewById(R.id.detail_image);
 
-        txDetailName.setText(wonder.getName().toString());
+        
         txDetailDescription.setText(wonder.getDescription().toString());
 
         String img = wonder.getPhoto().split("\\.")[0];

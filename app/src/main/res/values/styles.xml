@@ -17,6 +17,7 @@
     <style name="AppTheme.Widget.Toolbar" parent="Widget.AppCompat.Toolbar">
         <item name="android:minHeight">?attr/actionBarSize</item>
         <item name="android:background">?attr/colorPrimary</item>
+
     </style>
 
     <style name="AppTheme.Widget.Toolbar.Transparent" parent="@style/AppTheme.Widget.Toolbar">
