@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -24,6 +25,10 @@ public class WonderDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         wonder = (Wonder) getIntent().getSerializableExtra("wonder");
         setContentView(R.layout.activity_wonder_detail);
+
+        final Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         TextView txDetailName = (TextView) findViewById(R.id.detail_name);
         TextView txDetailDescription = (TextView) findViewById(R.id.detail_description);

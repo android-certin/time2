@@ -23,8 +23,7 @@
             android:fitsSystemWindows="true">
 
             <ImageView
-                android:id="@+id/image"
-                android:src="@drawable/pic"
+                android:id="@+id/detail_image"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:scaleType="centerCrop"
