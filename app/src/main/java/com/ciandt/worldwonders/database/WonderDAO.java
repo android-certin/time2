@@ -176,10 +176,10 @@ public class WonderDAO implements DAO<Wonder> {
 
     public boolean getBookMarkById(Long id) {
 
-        int retorno=0;
-        Cursor cursor = sqLiteDatabase.rawQuery("select count(*) from bookmarks where idWonders = " + id + ";", null);
+        long retorno=0;
+        Cursor cursor = sqLiteDatabase.rawQuery("select count(id) from bookmarks where idWonders = " + id + ";", null);
         if (cursor.moveToFirst()){
-            retorno = cursor.getCount();
+            retorno = cursor.getLong(cursor.getColumnIndex("count(id)"));
         }
         close();
         return retorno > 0;
