@@ -26,7 +26,7 @@ public class WonderRecyclerAdapter extends RecyclerView.Adapter<WonderRecyclerAd
 
     private List<Wonder> wonderLista;
     private Context context;
-    private Wonder wonder;
+    //private Wonder wonder;
 
     public WonderRecyclerAdapter(List<Wonder> wonderList, Context context) {
         this.wonderLista = wonderList;
@@ -51,14 +51,14 @@ public class WonderRecyclerAdapter extends RecyclerView.Adapter<WonderRecyclerAd
         Picasso.with(context).load(Helpers.getRawResourceID(context, imgStr))
                 .config(Bitmap.Config.RGB_565).resize(250,250).centerCrop()
                 .into(holder.imgViewIcon);
-        wonder = wonderLista.get(position);
+        final Wonder wonder = wonderLista.get(position);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, WonderDetailActivity.class);
                 intent.putExtra("wonder",wonder);
-                context.startActivity(intent);
+                v.getContext().startActivity(intent);
 
             }
         });
