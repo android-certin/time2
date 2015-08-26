@@ -13,6 +13,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ciandt.worldwonders.R;
 import com.ciandt.worldwonders.helpers.Helpers;
@@ -90,7 +91,7 @@ public class WonderDetailActivity extends AppCompatActivity {
                 }
 
                 else {
-                    //Task.
+                    Toast.makeText(this, getResources().getText(R.string.mensagem_direcao_invalida), Toast.LENGTH_SHORT).show();
                 }
 
 

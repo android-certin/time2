@@ -13,9 +13,10 @@
     <string name="hello_world">Hello world!</string>
     <string name="msg_progress_dialog_wait_image">Carregando imagem...</string>
     <string name="title_progress_dialog_wait_image">Aguarde</string>
-    ß
+
     <string name="action_bookmark">Bookmark</string>
     <string name="action_share">Compartilhar</string>
     <string name="action_directions">Direção</string>
+    <string name="mensagem_direcao_invalida">Direção não fornecida para a maravilha!</string>
 
 </resources>
