@@ -14,6 +14,15 @@ public class Wonder implements Serializable{
     private String photo;
     private Double latitude;
     private Double longitude;
+    private boolean bookMark;
+
+    public boolean isBookMark() {
+        return bookMark;
+    }
+
+    public void setBookMark(boolean bookMark) {
+        this.bookMark = bookMark;
+    }
 
     public Long getId() {
         return id;

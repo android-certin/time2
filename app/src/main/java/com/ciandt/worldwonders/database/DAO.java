@@ -22,5 +22,4 @@ public interface DAO<T>{
     public boolean insert(T t);
 
 
-
 }

@@ -16,7 +16,8 @@ import java.util.List;
  */
 public class WonderDAO implements DAO<Wonder> {
 
-    private final String NOME_TABELA = "wonders";
+    private final String NOME_TABELA_WONDERS = "wonders";
+    private final String NOME_TABELA_BOOKMARKS = "bookmarks";
 
     private Context context;
     private WondersSQLiteHelper wondersSQLiteHelper;
@@ -33,7 +34,7 @@ public class WonderDAO implements DAO<Wonder> {
     public List<Wonder> getAll() {
 
         List<Wonder> lista = new ArrayList<>();
-        Cursor cursor = sqLiteDatabase.query(NOME_TABELA, null, null, null, null, null, null);
+        Cursor cursor = sqLiteDatabase.query(NOME_TABELA_WONDERS, null, null, null, null, null, null);
 
         if (cursor.moveToFirst()) {
 
@@ -67,7 +68,7 @@ public class WonderDAO implements DAO<Wonder> {
     @Override
     public Wonder getById(Long id) {
 
-        Cursor cursor = sqLiteDatabase.query(NOME_TABELA, null, "id", new String[]{id.toString()}, null, null, null);
+        Cursor cursor = sqLiteDatabase.query(NOME_TABELA_WONDERS, null, "id", new String[]{id.toString()}, null, null, null);
 
         Wonder wonder = new Wonder();
 
@@ -84,7 +85,7 @@ public class WonderDAO implements DAO<Wonder> {
     public List<Wonder> search(String word) {
 
         List<Wonder> lista = new ArrayList<>();
-        Cursor cursor = sqLiteDatabase.query(NOME_TABELA, null, "name", new String[]{"%"+word+"%"}, null, null, null);
+        Cursor cursor = sqLiteDatabase.query(NOME_TABELA_WONDERS, null, "name", new String[]{"%"+word+"%"}, null, null, null);
 
         if (cursor.moveToFirst()) {
 
@@ -112,7 +113,7 @@ public class WonderDAO implements DAO<Wonder> {
 
         ContentValues values = getContentValues(wonder);
 
-        int retorno = sqLiteDatabase.update(NOME_TABELA, values, "id", new String[]{wonder.getId().toString()});
+        int retorno = sqLiteDatabase.update(NOME_TABELA_WONDERS, values, "id", new String[]{wonder.getId().toString()});
 
         close();
 
@@ -134,7 +135,7 @@ public class WonderDAO implements DAO<Wonder> {
     @Override
     public boolean delete(Wonder wonder) {
 
-        int retorno = sqLiteDatabase.delete(NOME_TABELA, "id", new String[]{wonder.getId().toString()});
+        int retorno = sqLiteDatabase.delete(NOME_TABELA_WONDERS, "id", new String[]{wonder.getId().toString()});
         close();
         return retorno > 0;
     }
@@ -144,10 +145,43 @@ public class WonderDAO implements DAO<Wonder> {
 
         ContentValues values = getContentValues(wonder);
 
-        long retorno = sqLiteDatabase.insert(NOME_TABELA,null,values);
+        long retorno = sqLiteDatabase.insert(NOME_TABELA_WONDERS, null, values);
 
         close();
 
         return retorno > 0;
     }
+
+    public boolean insertBookMark(Wonder wonder){
+
+        ContentValues values = new ContentValues();
+        values.put("idWonders", wonder.getId());
+
+        long retorno = sqLiteDatabase.insert(NOME_TABELA_BOOKMARKS,null,values);
+
+        close();
+
+        return retorno > 0;
+
+    }
+
+
+    public boolean deleteBookMark(Wonder wonder){
+
+        int retorno = sqLiteDatabase.delete(NOME_TABELA_BOOKMARKS, "idWonders", new String[]{wonder.getId().toString()});
+        close();
+        return retorno > 0;
+
+    }
+
+    public boolean getBookMarkById(Long id) {
+
+        int retorno;
+        Cursor cursor = sqLiteDatabase.rawQuery("select count(*) from wonders where idWonders = " + id + ";", null);
+        retorno = cursor.getCount();
+        close();
+        return retorno > 0;
+    }
+
+
 }

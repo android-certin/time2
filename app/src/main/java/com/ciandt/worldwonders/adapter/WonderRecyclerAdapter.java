@@ -26,7 +26,7 @@ public class WonderRecyclerAdapter extends RecyclerView.Adapter<WonderRecyclerAd
 
     private List<Wonder> wonderLista;
     private Context context;
-    //private Wonder wonder;
+
 
     public WonderRecyclerAdapter(List<Wonder> wonderList, Context context) {
         this.wonderLista = wonderList;
