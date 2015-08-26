@@ -23,6 +23,7 @@ import com.ciandt.worldwonders.adapter.WorldWonderPageAdapter;
 import com.ciandt.worldwonders.database.WonderDAO;
 import com.ciandt.worldwonders.model.Wonder;
 
+import java.util.ArrayList;
 import java.util.Collections;
 
 import java.util.List;
@@ -53,6 +54,7 @@ public class WondersFragment extends Fragment {
 
         WonderDAO wonderDAO = new WonderDAO(getActivity());
         List<Wonder> wonderList = wonderDAO.getAll();
+        List<Wonder> wonders = new ArrayList<>(wonderList);
         Collections.shuffle(wonderList);
 
         viewPager = (ViewPager) view.findViewById(R.id.pager);
@@ -62,7 +64,7 @@ public class WondersFragment extends Fragment {
         recyclerView = (RecyclerView) view.findViewById(R.id.wonder_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        recyclerView.setAdapter(new WonderRecyclerAdapter(wonderList,getContext()));
+        recyclerView.setAdapter(new WonderRecyclerAdapter(wonders,getContext()));
     }
 
 

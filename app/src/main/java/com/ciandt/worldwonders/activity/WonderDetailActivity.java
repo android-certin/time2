@@ -35,7 +35,7 @@ public class WonderDetailActivity extends AppCompatActivity {
         String img = wonder.getPhoto().split("\\.")[0];
 
         Picasso.with(this).load(Helpers.getRawResourceID(this, img))
-                .config(Bitmap.Config.RGB_565).centerCrop()
+                .config(Bitmap.Config.RGB_565).resize(300,300).centerCrop()
                 .into(imgDetail);
 
 
