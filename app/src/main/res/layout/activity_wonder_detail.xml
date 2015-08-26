@@ -7,11 +7,25 @@
         layout="@layout/app_toolbar"
         />
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/detail_image"
+        android:layout_below="@+id/toolbar"/>
+
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/detail_name"
-        android:layout_below="@+id/toolbar"
-        android:text="dsaaa"/>
+        android:layout_below="@+id/detail_image"
+        android:text="detail_name"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/detail_description"
+        android:layout_below="@+id/detail_name"
+        android:text="detail_description"/>
+
 
 </RelativeLayout>
