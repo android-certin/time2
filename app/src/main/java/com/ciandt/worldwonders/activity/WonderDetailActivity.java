@@ -39,15 +39,10 @@ public class WonderDetailActivity extends AppCompatActivity {
         collapsingToolbarLayout.setTitle(wonder.getName());
         setSupportActionBar(toolbar);
 
-
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-
 
         TextView txDetailDescription = (TextView) findViewById(R.id.detail_description);
         ImageView imgDetail = (ImageView) findViewById(R.id.detail_image);
-
 
         txDetailDescription.setText(wonder.getDescription().toString());
 
@@ -64,6 +59,7 @@ public class WonderDetailActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()) {
+
             case R.id.action_bookmark:
 
 
@@ -93,7 +89,6 @@ public class WonderDetailActivity extends AppCompatActivity {
                 else {
                     Toast.makeText(this, getResources().getText(R.string.mensagem_direcao_invalida), Toast.LENGTH_SHORT).show();
                 }
-
 
                 break;
         }
