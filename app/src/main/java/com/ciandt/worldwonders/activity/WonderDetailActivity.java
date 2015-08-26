@@ -90,7 +90,7 @@ public class WonderDetailActivity extends AppCompatActivity {
                 }
 
                 else {
-                    Task.
+                    //Task.
                 }
 
 
