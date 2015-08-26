@@ -55,6 +55,14 @@ public class WondersFragment extends Fragment {
         WonderDAO wonderDAO = new WonderDAO(getActivity());
         List<Wonder> wonderList = wonderDAO.getAll();
         List<Wonder> wonders = new ArrayList<>(wonderList);
+        wonderDAO = new WonderDAO(getActivity());
+        for (Wonder wonder :wonders) {
+            if (new WonderDAO(getContext()).getBookMarkById(wonder.getId())){
+                wonder.setBookMark(true);
+            }
+
+        }
+        wonderDAO.close();
         Collections.shuffle(wonderList);
 
         viewPager = (ViewPager) view.findViewById(R.id.pager);

@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ciandt.worldwonders.R;
+import com.ciandt.worldwonders.database.WonderDAO;
 import com.ciandt.worldwonders.helpers.Helpers;
 import com.ciandt.worldwonders.model.Wonder;
 import com.squareup.picasso.Picasso;
@@ -61,8 +62,13 @@ public class WonderDetailActivity extends AppCompatActivity {
         switch (item.getItemId()) {
 
             case R.id.action_bookmark:
-
-
+                WonderDAO wonderDAO = new WonderDAO(this);
+                if (wonder.isBookMark()){
+                    wonderDAO.deleteBookMark(wonder);
+                }else
+                {
+                    wonderDAO.insertBookMark(wonder);
+                }
 
                 break;
 
