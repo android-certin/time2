@@ -28,6 +28,8 @@ public class WonderDetailActivity extends AppCompatActivity {
 
     Wonder wonder;
 
+    MenuItem itemBookmark;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,8 +66,10 @@ public class WonderDetailActivity extends AppCompatActivity {
                 WonderDAO wonderDAO = new WonderDAO(this);
                 if (wonder.isBookMark()){
                     wonderDAO.deleteBookMark(wonder);
+                    itemBookmark.setIcon(R.drawable.ic_bookmark_border_white_24dp);
                 }else {
                     wonderDAO.insertBookMark(wonder);
+                    itemBookmark.setIcon(R.drawable.ic_bookmark_white_24dp);
                 }
 
                 break;
@@ -105,8 +109,10 @@ public class WonderDetailActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_world_wonder, menu);
 
+        itemBookmark= menu.findItem(R.id.action_bookmark);
+
         if (wonder.isBookMark()) {
-            menu.findItem(R.id.action_bookmark).setIcon(R.drawable.ic_bookmark_white_24dp);
+            itemBookmark.setIcon(R.drawable.ic_bookmark_white_24dp);
         }
         return true;
     }
