@@ -121,9 +121,10 @@ public class WonderDetailFragment extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
+
  
-    public void onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getActivity().getMenuInflater();
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_world_wonder, menu);
 
         itemBookmark= menu.findItem(R.id.action_bookmark);
@@ -132,4 +133,6 @@ public class WonderDetailFragment extends Fragment {
             itemBookmark.setIcon(R.drawable.ic_bookmark_white_24dp);
         }
     }
+
+
 }
