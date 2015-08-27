@@ -65,12 +65,6 @@ public class WonderRecyclerAdapter extends RecyclerView.Adapter<WonderRecyclerAd
 
             }
         });
-        if (Helpers.isTablet(context)) {
-            Bundle bd = new Bundle();
-            bd.putSerializable("wonderSelect", wonderLista.get(0));
-            WonderDetailFragment wonderDetailFragment = new WonderDetailFragment();
-            wonderDetailFragment.setArguments(bd);
-        }
     }
 
     @Override
