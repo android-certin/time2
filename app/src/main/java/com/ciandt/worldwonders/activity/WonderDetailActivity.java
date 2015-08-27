@@ -58,14 +58,14 @@ public class WonderDetailActivity extends AppCompatActivity {
                 .into(imgDetail);
 
         TextView txtFonte = (TextView) findViewById(R.id.detail_fonte);
+        txtFonte.setText(R.string.detail_description);
         txtFonte.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 WebViewFragment webFragment = new WebViewFragment();
-                Bundle bd = new Bundle(1);
-                bd.putSerializable("wonder",wonder);
-                webFragment.setArguments(bd);
-                webFragment.show(getSupportFragmentManager());
+                Bundle bd = new Bundle();
+                bd.putSerializable("wonderItem",wonder);
+                webFragment.show(getSupportFragmentManager()).setArguments(bd);
             }
         });
 

@@ -20,7 +20,7 @@ import com.ciandt.worldwonders.model.Wonder;
  */
 public class WebViewFragment extends DialogFragment {
 
-    public Wonder wonder;
+     Wonder wonder;
 
 
     public static DialogFragment show(FragmentManager fm) {
@@ -37,7 +37,7 @@ public class WebViewFragment extends DialogFragment {
 
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.webview_fragment, null);
 
-        wonder = (Wonder) getArguments().getSerializable("wonder");
+        wonder = (Wonder) getArguments().getSerializable("wonderItem");
 
         WebView webView = (WebView) view.findViewById(R.id.webView);
         webView.loadUrl(wonder.getUrl());

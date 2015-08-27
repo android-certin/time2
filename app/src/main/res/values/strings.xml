@@ -18,5 +18,6 @@
     <string name="action_share">Compartilhar</string>
     <string name="action_directions">Direção</string>
     <string name="mensagem_direcao_invalida">Direção não fornecida para a maravilha!</string>
+    <string name="detail_description">Fonte: Wikipedia</string>
 
 </resources>

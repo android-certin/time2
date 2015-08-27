@@ -12,4 +12,5 @@
     <string name="action_bookmark">Bookmark</string>
     <string name="action_directions">Direção</string>
     <string name="mensagem_direcao_invalida">Direção não fornecida para a maravilha!</string>
+    <string name="detail_description">detail_description</string>
 </resources>
