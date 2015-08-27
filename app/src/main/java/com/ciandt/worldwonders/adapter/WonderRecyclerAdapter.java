@@ -29,9 +29,11 @@ public class WonderRecyclerAdapter extends RecyclerView.Adapter<WonderRecyclerAd
 
     private List<Wonder> wonderLista;
     private Context context;
+    WonderOnClickListener listener;
 
 
-    public WonderRecyclerAdapter(List<Wonder> wonderList, Context context) {
+    public WonderRecyclerAdapter(List<Wonder> wonderList, Context context, WonderOnClickListener listener) {
+        this.listener = listener;
         this.wonderLista = wonderList;
         this.context = context;
     }
@@ -59,9 +61,10 @@ public class WonderRecyclerAdapter extends RecyclerView.Adapter<WonderRecyclerAd
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, WonderDetailActivity.class);
-                intent.putExtra("wonder", wonder);
-                v.getContext().startActivity(intent);
+                listener.onClick(wonder);
+                //Intent intent = new Intent(context, WonderDetailActivity.class);
+                //intent.putExtra("wonder", wonder);
+                //v.getContext().startActivity(intent);
 
             }
         });
@@ -70,6 +73,10 @@ public class WonderRecyclerAdapter extends RecyclerView.Adapter<WonderRecyclerAd
     @Override
     public int getItemCount() {
         return wonderLista.size();
+    }
+
+    public interface WonderOnClickListener{
+        void onClick(Wonder wonder);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{

@@ -1,5 +1,6 @@
 package com.ciandt.worldwonders.fragment;
 
+import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -18,9 +19,11 @@ import android.widget.TextView;
 
 import com.ciandt.worldwonders.R;
 
+import com.ciandt.worldwonders.activity.WonderDetailActivity;
 import com.ciandt.worldwonders.adapter.WonderRecyclerAdapter;
 import com.ciandt.worldwonders.adapter.WorldWonderPageAdapter;
 import com.ciandt.worldwonders.database.WonderDAO;
+import com.ciandt.worldwonders.helpers.Helpers;
 import com.ciandt.worldwonders.model.Wonder;
 
 import java.util.ArrayList;
@@ -72,7 +75,18 @@ public class WondersFragment extends Fragment {
         recyclerView = (RecyclerView) view.findViewById(R.id.wonder_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        recyclerView.setAdapter(new WonderRecyclerAdapter(wonders,getContext()));
+        recyclerView.setAdapter(new WonderRecyclerAdapter(wonders,getContext(),
+                new WonderRecyclerAdapter.WonderOnClickListener() {
+            public void onClick(Wonder wonder) {
+                if (Helpers.isTablet(getContext())) {
+                } else {
+                    Intent intent = new Intent(getActivity(), WonderDetailActivity.class);
+                    intent.putExtra("wonder", wonder);
+                    startActivity(intent);
+                }
+
+            }
+        }));
     }
 
 
