@@ -47,9 +47,6 @@ public class MainActivity extends BaseActivity {
 
     private void inflateFragment(){
         replaceFragment(new WondersFragment(), R.id.fragment_container);
-        if(Helpers.isTablet(this)){
-            replaceFragment(new WonderDetailFragment(), R.id.fragment_container_bottom);
-        }
     }
 
     private void replaceFragment(Fragment fragment, int idDrawable) {
