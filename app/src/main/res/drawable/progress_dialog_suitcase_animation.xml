@@ -1,4 +1,5 @@
 <animation-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@drawable/suitcase_normal" android:duration="900"/>
+    <item android:drawable="@drawable/suitcase_normal" android:duration="500"/>
     <item android:drawable="@drawable/suitcase_selected" android:duration="300" />
+    <item android:drawable="@drawable/suitcase_normal" android:duration="1700"/>
 </animation-list>
