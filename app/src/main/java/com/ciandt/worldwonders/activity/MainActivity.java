@@ -43,9 +43,12 @@ public class MainActivity extends BaseActivity {
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, fragment)
+                .replace(R.id.fragment_container, new LoginFragment())
                 .commit();
 
+        fragmentManager.beginTransaction()
+                .replace(R.id.fragment_container2, new WondersFragment())
+                .commit();
     }
 
 
