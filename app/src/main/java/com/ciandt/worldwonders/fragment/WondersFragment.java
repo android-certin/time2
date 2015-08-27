@@ -79,9 +79,13 @@ public class WondersFragment extends Fragment {
                 new WonderRecyclerAdapter.WonderOnClickListener() {
             public void onClick(Wonder wonder) {
                 if (Helpers.isTablet(getContext())) {
+                    Fragment fragment = new WonderDetailFragment();
+                    Bundle b = new Bundle();
+                    b.putSerializable("wonderSelect", wonder);
+                    fragment.setArguments(b);
                     FragmentManager fragmentManager = getFragmentManager();
                     fragmentManager.beginTransaction()
-                            .replace( R.id.fragment_container_bottom, new WonderDetailFragment())
+                            .replace( R.id.fragment_container_bottom, fragment)
                             .commit();
 
                 } else {
