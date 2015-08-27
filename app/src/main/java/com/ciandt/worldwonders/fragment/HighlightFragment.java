@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.media.MediaSync;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatTextView;
@@ -32,7 +33,7 @@ import java.util.List;
  */
 public class HighlightFragment extends Fragment {
 
-    ProgressDialog progressDialog;
+    DialogFragment progressDialog;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -50,7 +51,10 @@ public class HighlightFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        progressDialog = new ProgressDialog(getActivity()).show(getActivity(), getString(R.string.title_progress_dialog_wait_image), getString(R.string.msg_progress_dialog_wait_image), false, true);
+        //progressDialog = new ProgressDialog(getActivity()).show(getActivity(), getString(R.string.title_progress_dialog_wait_image), getString(R.string.msg_progress_dialog_wait_image), false, true);
+
+        progressDialog =  new ProgressDialogFragment().show(getFragmentManager());
+
 
         ImageView imageView = (ImageView)view.findViewById(R.id.img_wonders);
         TextView textImg = (TextView) view.findViewById(R.id.nameImg);
