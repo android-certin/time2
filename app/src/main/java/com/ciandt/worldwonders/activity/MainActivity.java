@@ -1,5 +1,6 @@
 package com.ciandt.worldwonders.activity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -8,6 +9,7 @@ import android.util.Log;
 
 import com.ciandt.worldwonders.R;
 import com.ciandt.worldwonders.fragment.LoginFragment;
+import com.ciandt.worldwonders.fragment.WonderDetailFragment;
 import com.ciandt.worldwonders.fragment.WondersFragment;
 import com.ciandt.worldwonders.model.User;
 
@@ -19,6 +21,7 @@ public class MainActivity extends BaseActivity {
     private static final String TAG = "MainActivity";
 
     LoginFragment loginFragment;
+    FragmentManager fragmentManager;
 
 
     @Override
@@ -26,29 +29,37 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Log.i(TAG, "onCreate");
+        fragmentManager = getSupportFragmentManager();
 
         loginFragment = new LoginFragment();
         loginFragment.setOnLoginListener(new LoginFragment.OnLoginListener() {
             @Override
             public void onLogin(User user) {
-                replaceFragment(new WondersFragment());
+                inflateFragment();
             }
         });
 
-        replaceFragment(loginFragment);
-
+            replaceFragment(loginFragment, R.id.fragment_container);
     }
 
-    private void replaceFragment(Fragment fragment) {
+    public static boolean isTablet(Context context) {
+        return context.getResources().getConfiguration().smallestScreenWidthDp >= 600;
+    }
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
+    private void inflateFragment(){
+        replaceFragment(new WondersFragment(), R.id.fragment_container);
+        if(isTablet(this)){
+            replaceFragment(new WonderDetailFragment(), R.id.fragment_container_bottom);
+        }
+    }
+
+    private void replaceFragment(Fragment fragment, int idDrawable) {
+        fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, new LoginFragment())
+                .replace(idDrawable, fragment)
                 .commit();
 
-        fragmentManager.beginTransaction()
-                .replace(R.id.fragment_container2, new WondersFragment())
-                .commit();
+
     }
 
 
