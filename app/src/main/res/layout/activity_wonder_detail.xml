@@ -59,6 +59,14 @@
                     android:layout_below="@+id/detail_name"
                     android:text="detail_description"/>
 
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/detail_fonte"
+                    android:layout_below="@+id/detail_description"
+                    android:text="detail_description"/>
+
             </LinearLayout>
 
         </android.support.v4.widget.NestedScrollView>

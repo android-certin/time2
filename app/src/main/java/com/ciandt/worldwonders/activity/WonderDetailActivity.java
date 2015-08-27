@@ -11,12 +11,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ciandt.worldwonders.R;
 import com.ciandt.worldwonders.database.WonderDAO;
+import com.ciandt.worldwonders.fragment.WebViewFragment;
 import com.ciandt.worldwonders.helpers.Helpers;
 import com.ciandt.worldwonders.model.Wonder;
 import com.squareup.picasso.Picasso;
@@ -54,6 +56,18 @@ public class WonderDetailActivity extends AppCompatActivity {
         Picasso.with(this).load(Helpers.getRawResourceID(this, img))
                 .config(Bitmap.Config.RGB_565).resize(300,300).centerCrop()
                 .into(imgDetail);
+
+        TextView txtFonte = (TextView) findViewById(R.id.detail_fonte);
+        txtFonte.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                WebViewFragment webFragment = new WebViewFragment();
+                Bundle bd = new Bundle(1);
+                bd.putSerializable("wonder",wonder);
+                webFragment.setArguments(bd);
+                webFragment.show(getSupportFragmentManager());
+            }
+        });
 
     }
 

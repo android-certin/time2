@@ -56,6 +56,8 @@ public class HighlightFragment extends Fragment {
 
         progressDialog =  new ProgressDialogFragment().show(getFragmentManager());
 
+
+
         ImageView imageView = (ImageView)view.findViewById(R.id.img_wonders);
         TextView textImg = (TextView) view.findViewById(R.id.nameImg);
 
@@ -68,7 +70,7 @@ public class HighlightFragment extends Fragment {
                 .into(imageView, new Callback() {
                     @Override
                     public void onSuccess() {
-                       // progressDialog.dismiss();
+                       progressDialog.dismiss();
                     }
 
                     @Override
