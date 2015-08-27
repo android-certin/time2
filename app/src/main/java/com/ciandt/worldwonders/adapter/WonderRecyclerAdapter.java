@@ -1,8 +1,10 @@
 package com.ciandt.worldwonders.adapter;
 
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 
 import com.ciandt.worldwonders.R;
 import com.ciandt.worldwonders.activity.WonderDetailActivity;
+import com.ciandt.worldwonders.fragment.WonderDetailFragment;
 import com.ciandt.worldwonders.helpers.Helpers;
 import com.ciandt.worldwonders.model.Wonder;
 import com.squareup.picasso.Picasso;
@@ -57,12 +60,17 @@ public class WonderRecyclerAdapter extends RecyclerView.Adapter<WonderRecyclerAd
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, WonderDetailActivity.class);
-                intent.putExtra("wonder",wonder);
+                intent.putExtra("wonder", wonder);
                 v.getContext().startActivity(intent);
 
             }
         });
-
+        if (Helpers.isTablet(context)) {
+            Bundle bd = new Bundle();
+            bd.putSerializable("wonderSelect", wonderLista.get(0));
+            WonderDetailFragment wonderDetailFragment = new WonderDetailFragment();
+            wonderDetailFragment.setArguments(bd);
+        }
     }
 
     @Override

@@ -38,17 +38,19 @@ public class WonderDetailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        wonder = (Wonder) getActivity().getIntent().getSerializableExtra("wonder");
         View view = inflater.inflate(R.layout.activity_wonder_detail, container, false);
 
-        final Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
+        wonder = (Wonder) getArguments().getSerializable("wonderSelect");
+
+
+        final Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
         toolbar.setBackgroundColor(getResources().getColor(android.R.color.transparent));
         CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) view.findViewById(R.id.collapsing_toolbar);
         collapsingToolbarLayout.setTitle(wonder.getName());
         toolbar.inflateMenu(R.menu.menu_world_wonder);
 
-        TextView txDetailDescription = (TextView) getActivity().findViewById(R.id.detail_description);
-        ImageView imgDetail = (ImageView) getActivity().findViewById(R.id.detail_image);
+        TextView txDetailDescription = (TextView) view.findViewById(R.id.detail_description);
+        ImageView imgDetail = (ImageView) view.findViewById(R.id.detail_image);
 
         txDetailDescription.setText(wonder.getDescription().toString());
 

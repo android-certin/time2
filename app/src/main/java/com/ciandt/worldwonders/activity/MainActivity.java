@@ -11,6 +11,7 @@ import com.ciandt.worldwonders.R;
 import com.ciandt.worldwonders.fragment.LoginFragment;
 import com.ciandt.worldwonders.fragment.WonderDetailFragment;
 import com.ciandt.worldwonders.fragment.WondersFragment;
+import com.ciandt.worldwonders.helpers.Helpers;
 import com.ciandt.worldwonders.model.User;
 
 /**
@@ -42,13 +43,11 @@ public class MainActivity extends BaseActivity {
             replaceFragment(loginFragment, R.id.fragment_container);
     }
 
-    public static boolean isTablet(Context context) {
-        return context.getResources().getConfiguration().smallestScreenWidthDp >= 600;
-    }
+
 
     private void inflateFragment(){
         replaceFragment(new WondersFragment(), R.id.fragment_container);
-        if(isTablet(this)){
+        if(Helpers.isTablet(this)){
             replaceFragment(new WonderDetailFragment(), R.id.fragment_container_bottom);
         }
     }
