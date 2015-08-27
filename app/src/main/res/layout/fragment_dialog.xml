@@ -7,27 +7,38 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="8dp"
-        android:stateListAnimator="@anim/progress_dialog_camera_animation"
-       />
+        android:id="@+id/anim_01"
+        android:background="@drawable/progress_dialog_suitcase_animation"/>
+
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="8dp"
-        android:stateListAnimator="@anim/progress_dialog_eiffel_tower_animation"/>
+        android:id="@+id/anim_02"
+        android:background="@drawable/progress_dialog_eiffel_tower_animation"/>
+
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="8dp"
-        android:stateListAnimator="@anim/progress_dialog_pyramids_animation"/>
+        android:id="@+id/anim_03"
+        android:background="@drawable/progress_dialog_camera_animation"
+        />
+
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="8dp"
-        android:stateListAnimator="@anim/progress_dialog_suitcase_animation"/>
+        android:id="@+id/anim_04"
+        android:background="@drawable/progress_dialog_pyramids_animation"
+        />
+
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="8dp"
-        android:stateListAnimator="@anim/progress_dialog_taj_mahal_animation"/>
+        android:id="@+id/anim_05"
+        android:background="@drawable/progress_dialog_taj_mahal_animation"
+        />
 
 </LinearLayout>

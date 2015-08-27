@@ -1,4 +1,0 @@
-<animation-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@drawable/camera_normal" android:duration="150"/>
-    <item android:drawable="@drawable/camera_selected" android:duration="150" />
-</animation-list>

@@ -2,6 +2,7 @@ package com.ciandt.worldwonders.fragment;
 
 import android.app.ProgressDialog;
 import android.graphics.Bitmap;
+import android.graphics.drawable.AnimationDrawable;
 import android.media.MediaSync;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,6 +13,7 @@ import android.support.v7.widget.AppCompatTextView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -51,9 +53,11 @@ public class HighlightFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        //progressDialog = new ProgressDialog(getActivity()).show(getActivity(), getString(R.string.title_progress_dialog_wait_image), getString(R.string.msg_progress_dialog_wait_image), false, true);
 
         progressDialog =  new ProgressDialogFragment().show(getFragmentManager());
+
+
+
 
 
         ImageView imageView = (ImageView)view.findViewById(R.id.img_wonders);
@@ -68,7 +72,7 @@ public class HighlightFragment extends Fragment {
                 .into(imageView, new Callback() {
                     @Override
                     public void onSuccess() {
-                        progressDialog.dismiss();
+                       // progressDialog.dismiss();
                     }
 
                     @Override
